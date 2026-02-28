@@ -1,0 +1,1 @@
+let startEvent = new CustomEvent("start");

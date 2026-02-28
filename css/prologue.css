@@ -1,0 +1,386 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0vw;
+    height: 100dvh;
+}
+
+/* ===
+Player
+=== */
+
+#player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap);
+    height: 100dvh;
+    margin-right: 0;
+    transition: .5s ease-in-out;
+}
+
+#player:has(~ #lyrics:not(.hide)) {
+    margin-right: 15vw;
+}
+
+#player.started .cover,
+#player.started .content,
+#player.started .bar,
+#player.started .buttons,
+#player.started .buttons > * {
+    transform: translate(0, 0);
+}
+
+/* ==
+Cover
+== */
+
+.cover {
+    position: relative;
+    width: var(--bar-width);
+    margin-inline: auto;
+    transform: translateY(-100vh);
+    transition: var(--transition);
+}
+
+.placeholder,
+.cover img,
+.blur {
+    width: 100%;
+    aspect-ratio: 1;
+    background-color: var(--txt-muted);
+    border-radius: var(--br-radius);
+}
+
+.cover img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    image-rendering: pixelated;
+}
+
+.blur {
+    position: absolute;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: blur(2rem);
+    opacity: 1;
+}
+
+/* ====
+Content
+==== */
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: var(--bar-width);
+    margin-inline: auto;
+    transform: translateX(-100vw);
+    transition: var(--transition);
+}
+
+/* =======
+Status Bar
+======= */
+
+.bar {
+    width: var(--bar-width);
+    margin-inline: auto;
+    position: relative;
+    transform: translateX(100vw);
+    transition: var(--transition);
+}
+
+.remain {
+    width: 100%;
+    height: var(--bar-height);
+    background-color: var(--txt-muted);
+    border-radius: var(--bar-height);
+}
+
+.progress {
+    width: 0%;
+    height: var(--bar-height);
+    background-color: var(--txt-color);
+    border-radius: var(--bar-height);
+    position: absolute;
+    transition: width 30s linear;
+}
+
+.thumb {
+    width: calc(var(--bar-height) * 2);
+    height: calc(var(--bar-height) * 2);
+    border-radius: 50%;
+    background-color: var(--txt-color);
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    transition: left 30s linear;
+}
+
+#player.started .progress {
+    width: 11%;
+}
+
+#player.started .thumb {
+    left: 11%;
+}
+
+/* ====
+Buttons
+==== */
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--gap);
+}
+
+.buttons > *:not(#play) {
+    transform: translateY(100vh);
+    transition: var(--transition);
+}
+
+.buttons svg {
+    fill: var(--txt-color);
+}
+
+#play {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-30dvh) scale(8);
+    transition: var(--transition);
+}
+
+#play .play-arrow {
+    color: var(--bg-color);
+    fill: var(--bg-color);
+}
+
+#play-btn {
+    transition: .2s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+
+#play-btn:hover {
+    --txt-hover: oklch(from var(--txt-color) calc(l - 0.3) c h);
+    color: var(--txt-hover);
+    fill: var(--txt-hover);
+}
+
+#play::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--txt-muted);
+    opacity: 1;
+    transform: scale(.9);
+    transform-origin: center;
+    transition: .5s linear;
+    pointer-events: none;
+    z-index: -1;
+}
+
+#player.started #play::after {
+    opacity: 0;
+    transform: scale(1.6);
+}
+
+#play svg {
+    width: 3rem;
+    height: 3rem;
+}
+
+/* ===
+Lyrics
+=== */
+
+#lyrics {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+    transition: max-width .3s ease-in-out;
+    max-width: 0;
+}
+
+#lyrics:not(.hide) {
+    max-width: 50dvw;
+    opacity: 1;
+}
+
+.lyric {
+    display: flex;
+    flex-direction: row;
+    gap: var(--letter-spacing);
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+#lyrics.hide {
+    opacity: 0;
+    user-select: none;
+}
+
+.lyric span {
+    display: inline-block;
+    transform: translateY(-3rem);
+    opacity: 0;
+}
+
+.lyric span.animate {
+    animation: animLyrics 0.4s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+/* ---------
+Text Effects
+----------*/
+
+#lyrics .lyric span.heart.animate {
+    animation: animLyrics 0.4s cubic-bezier(.2,.8,.2,1) forwards, animHeartColor 1.25s linear 2s forwards;
+    position: relative;
+}
+
+#lyrics .lyric span.heart svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    color: var(--primary-color);
+    fill: oklch(from var(--primary-color) l c h / .5);
+    opacity: .75;
+    scale: 0;
+}
+
+#lyrics .lyric span.heart.animate svg {
+    animation: animHeartScale 1.25s cubic-bezier(.2,.8,.2,1) .8s forwards, animHeartFinal 1s ease-in 2.5s forwards;
+}
+
+#lyrics .lyric span[data-word="killing"] {
+    color: var(--bg-color);
+    position: relative;
+
+    &::after, &::before {
+        content: attr(data-word);
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: var(--txt-color);
+        opacity: 1;
+        transition: var(--transition);
+    }
+
+    &::after {
+        clip-path: polygon(100% 0, 0 0, 0 100%);
+    }
+
+    &::before {
+        clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+}
+
+.lyric span[data-word="killing"].animate {
+    animation: animLyrics 0.4s cubic-bezier(.2,.8,.2,1) forwards, animCutColor 3s ease-in .5s forwards;
+}
+
+#lyrics .lyric span[data-word="killing"].animate {
+    &::after {
+        animation: animCutUp .1s ease-in-out 1.79s forwards;
+    }
+    &::before {
+        animation: animCutDw .1s ease-in-out 1.79s forwards;
+    }
+}
+
+@keyframes animLyrics {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes animHeartScale {
+    0% {
+        scale: 0;
+        opacity: .75;
+    }
+    30% {
+        scale: 15;
+        opacity: 0;
+    }
+    31% {
+        scale: 0;
+        opacity: .75;
+    }
+    100% {
+        scale: 15;
+        opacity: 0;
+    }
+}
+
+@keyframes animHeartColor {
+    0% {
+        color: var(--primary-color);
+    }
+    30% {
+        color: var(--txt-color);
+    }
+    31% {
+        color: var(--primary-color);
+    }
+    100% {
+        color: var(--txt-color);
+    }
+}
+
+@keyframes animHeartFinal {
+    0% {
+        scale: 0;
+        opacity: .75;
+    }
+    30% {
+        scale: 15;
+        opacity: 0;
+    }
+    31% {
+        scale: 0;
+        opacity: 0;
+    }
+    100% {
+        scale: 200;
+        opacity: 1;
+        fill: #000;
+    }
+}
+
+@keyframes animCutColor {
+    to {
+        color: var(--primary-color);
+    }
+}
+
+@keyframes animCutUp {
+    to {
+        transform: translate(-3px, -2px);
+    }
+}
+
+@keyframes animCutDw {
+    to {
+        transform: translate(3px, 2px);
+    }
+}

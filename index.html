@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/root.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        body {
+            background-color: #000;
+            color: var(--txt-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: var(--gap);
+        }
+
+        #play {
+            width: 10rem;
+            text-align: center;
+            cursor: pointer;
+            border: var(--txt-color) solid 2px;
+            border-radius: var(--br-radius);
+            padding: var(--gap);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        p {
+            font-size: 1.5rem;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fade {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition:
+                opacity 0.8s ease,
+                max-height 0.8s ease;
+        }
+
+        .fade.show {
+            opacity: 1;
+            max-height: 5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 id="s0" class="fade show">Only One</h1>
+        <p id="s1" class="fade">Questo sito è molto importante per me</p>
+        <p id="s2" class="fade">Si basa su fatti realmente accaduti</p>
+    </div>
+    <div id="play">Play</div>
+
+    <script>
+        const playBtn = document.getElementById("play");
+        const sentences = document.querySelectorAll(".header > *");
+        let c = 0;
+
+        playBtn.addEventListener("click", () => {
+            sentences[c].classList.remove("show");
+            playBtn.textContent = "Next";
+
+            c++;
+
+            if (c >= sentences.length) {
+                setTimeout(() => {
+                    window.location.href = "./prologue.html";
+                }, 600);
+                return;
+            }
+
+            sentences[c].classList.add("show");
+        });
+    </script>
+</body>
+
+</html>

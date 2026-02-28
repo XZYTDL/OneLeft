@@ -1,0 +1,14 @@
+body {
+    background-color: #000;
+
+    color: var(--txt-color);
+
+    width: 100vw;
+    height: 100dvh;
+}
+
+canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 999;
+}

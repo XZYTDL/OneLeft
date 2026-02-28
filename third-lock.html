@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/root.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/third-lock.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <template id="notification-template">
+        <div class="notification">
+            <div class="notification-icon">
+                <img src="./assets/wa/wa-pfp.png" alt="WhatsApp PFP">
+                <div class="wa-icon"></div>
+            </div>
+            <div class="notification-body">
+                <h3>🔑 ✓@?;8</h3>
+                <p>è vero che sembro un barbagianni?</p>
+            </div>
+        </div>
+    </template>
+
+    <div id="black-screen"></div>
+
+    <div id="notification-div"></div>
+    <div class="container">
+        <div class="phone">
+            <div class="screen"></div>
+        </div>
+        <div id="message-div" class="message-div hide">
+            <div class="message-header">
+                <div class="message-icon">
+                    <img src="./assets/wa/wa-pfp.png" alt="WhatsApp PFP">
+                </div>
+                <div>
+                    <h3>🔑 ✓@?;8</h3>
+                    <p id="wa-status">Online</p>
+                </div>
+            </div>
+            <div id="message-body">
+            </div>
+            <div class="message-input">
+                <textarea id="send-input" rows="1" placeholder="Type a message" class="empty"></textarea>
+                <svg xmlns="http://www.w3.org/2000/svg" id="send-btn" width="24" height="24" viewBox="0 0 24 24" fill="#ffffff" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-horizontal-icon lucide-send-horizontal"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/third-lock.js" type="module"></script>
+</body>
+
+</html>

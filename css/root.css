@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+:root {
+    --bg-color: oklch(20% 0 270);
+    --txt-color: oklch(90% 0 270);
+    --txt-muted: oklch(from var(--txt-color) calc(l - 0.6) c h);
+    --primary-color: #ff0000;
+
+    --bar-height: 0.4rem;
+    --bar-width: 24rem;
+
+    --br-size: .4rem;
+    --br-radius: 1rem;
+    --gap: 1rem;
+    --letter-spacing: .4rem;
+
+    --transition: 1s cubic-bezier(1, 0.009, 0.581, -0.136);
+}
