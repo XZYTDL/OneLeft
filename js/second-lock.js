@@ -7,7 +7,7 @@ const mergeCanvas = document.createElement("canvas");
 const mergeCtx = mergeCanvas.getContext("2d");
 
 const img = new Image();
-img.src = "../assets/second-lock-bg.png";
+img.src = "../assets/second-bg.png";
 
 let originalData;
 let colorProgress;
@@ -185,4 +185,5 @@ window.addEventListener("resize", () => {
         isAnimating = false;
         setupCanvases();
     }, 150);
+
 });
