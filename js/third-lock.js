@@ -64,7 +64,7 @@ const chat = [
     { message: "ah quindi sono bella", time: "22:38", self: false },
     { message: "ti droghi, comunque", time: "22:39", self: false },
     { message: "Se queste sono le scelte sì", reply: -2, time: "22:39", self: true },
-    { message: "e allora aggiungile te le scelte dio foca monaca", reply: -1, time: "22:40", self: false },
+    { message: "e allora aggiungile te le scelte dio _9'@ ?9!@'@", reply: -1, time: "22:40", self: false },
     { message: "Non è vero, ho solo assunto del fentanyl", reply: -3, time: "22:40", self: true },
     { message: "succede", reply: -1, time: "22:41", self: false },
 ]
@@ -188,7 +188,7 @@ function sendMessage() {
         simulateOtherMessages();
     }
 
-    if (currentMessage >= chat.length - 7) {
+    if (currentMessage >= chat.length - 6) {
         document.getElementById("black-screen").classList.add("end");
 
         setTimeout(() => {

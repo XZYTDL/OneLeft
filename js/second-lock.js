@@ -185,6 +185,4 @@ window.addEventListener("resize", () => {
         isAnimating = false;
         setupCanvases();
     }, 150);
-
 });
-

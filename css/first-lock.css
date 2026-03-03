@@ -1,3 +1,11 @@
+body {
+    transition: .5s ease-in-out;
+}
+
+body.listen-clicked {
+    background-color: #000 !important;
+}
+
 .container {
     display: flex;
     flex-direction: row;
@@ -5,6 +13,13 @@
     height: 100dvh;
 
     flex-grow: 1;
+    transition: 3s ease-in;
+}
+
+body.listen-clicked .container {
+    gap: 100vw;
+    flex-grow: 0;
+    scale: 10;
 }
 
 .frame-container {
@@ -46,16 +61,16 @@ iframe {
     outline: none;
     border-radius: var(--br-radius);
     background-color: #32373b;
-    color: #fff;
+    color: oklch(from var(--main-color) calc(l + .25) c h);
     padding: var(--gap);
-    line-height: 1.2rem;
+    line-height: 1.4rem;
 
     height: 30dvh;
     width: 30vw;
 
     padding: 1rem;
     padding-top: 3rem;
-
+    
     box-shadow: inset 0 0 0 0px var(--main-color), 0 0 0 0px oklch(from var(--main-color) l c h / .33);
 
     transition: box-shadow .2s ease-in-out;
@@ -63,6 +78,12 @@ iframe {
 
 .areawrap {
     position: relative;
+}
+
+.areawrap ::selection,
+.areawrap ::-webkit-selection,
+.areawrap ::-moz-selection {
+    background-color: oklch(from var(--main-color) l c h / .5);
 }
 
 .areawrap::after {
@@ -77,6 +98,9 @@ iframe {
     background-color: #32373b;
     padding: .25rem;
     border-radius: .5rem;
+
+    z-index: 10;
+    pointer-events: none;
 }
 
 .areawrap textarea:focus {
@@ -86,3 +110,5 @@ iframe {
 .areawrap:has(#area-css) {--main-color: oklch(55.603% 0.21971 263.407);}
 .areawrap:has(#area-html) {--main-color: oklch(66.76% 0.22194 34.491);}
 .areawrap:has(#area-js) {--main-color: lch(80.86% 80.77 88.63);}
+
+.areawrap textarea::selection { background-color: oklch(from var(--main-color) l c h / .5); color: #fff; }

@@ -164,6 +164,12 @@ function loadLock(path, type, index) {
       if (child.isMesh && child.material) {
         child.material.metalness = 0.8;
         child.material.roughness = 0.5;
+
+        if (index > unlockLevel) {
+          child.material.transparent = true;
+          child.material.opacity = 0.2;
+        }
+
         child.material.needsUpdate = true;
       }
     });
@@ -294,4 +300,9 @@ animate();
 
 document.addEventListener("DOMContentLoaded", () => {
   unlockLevel = localStorage.getItem("unlockLevel") || 1;
+  if (unlockLevel >= 4) {
+    setTimeout(() => {
+      document.location.href = "./quote.html";
+    }, 5000);
+  }
 })
