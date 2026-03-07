@@ -2,6 +2,29 @@ import * as THREE from "three";
 import { GLTFLoader } from "https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
 import { clone } from "https://unpkg.com/three@0.160.0/examples/jsm/utils/SkeletonUtils.js";
 
+let eyesTargetOpacity = 0;
+let eyesFadeSpeed = 0.1;
+
+const textureLoader = new THREE.TextureLoader();
+
+const eyesTexture = textureLoader.load("./assets/eyes.svg");
+
+const eyesMaterial = new THREE.MeshBasicMaterial({
+    map: eyesTexture,
+    transparent: true,
+    opacity: 0
+});
+
+const eyesGeometry = new THREE.PlaneGeometry(8, 8);
+
+const eyes = new THREE.Mesh(eyesGeometry, eyesMaterial);
+
+eyes.position.set(0, 0, -4);
+
+setTimeout(()=>{
+    eyesTargetOpacity = 0.5;
+}, 3000);
+
 const threeCanvas = document.getElementById("butterfly");
 
 const scene = new THREE.Scene();
@@ -11,6 +34,8 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 );
+
+scene.add(eyes);
 
 const renderer = new THREE.WebGLRenderer({
     canvas: threeCanvas,
@@ -79,9 +104,23 @@ function renderLoop() {
 
     mixers.forEach(m => m.update(delta));
 
+    if (eyesMaterial.opacity !== eyesTargetOpacity) {
+
+        const direction = Math.sign(eyesTargetOpacity - eyesMaterial.opacity);
+
+        eyesMaterial.opacity += direction * eyesFadeSpeed * delta;
+
+        if (
+            (direction > 0 && eyesMaterial.opacity > eyesTargetOpacity) ||
+            (direction < 0 && eyesMaterial.opacity < eyesTargetOpacity)
+        ) {
+            eyesMaterial.opacity = eyesTargetOpacity;
+        }
+
+    }
+
     renderer.render(scene, camera);
 }
-
 
 renderLoop();
 

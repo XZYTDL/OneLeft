@@ -29,6 +29,28 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.set(0, 0, 5);
 camera.lookAt(0, 0, 0);
 
+// ====
+// Eyes
+// ====
+
+const textureLoader = new THREE.TextureLoader();
+
+const eyesTexture = textureLoader.load("./assets/eyes.svg");
+
+const eyesMaterial = new THREE.MeshBasicMaterial({
+    map: eyesTexture,
+    transparent: true,
+    opacity: 0
+});
+
+const eyesGeometry = new THREE.PlaneGeometry(8, 8);
+
+const eyes = new THREE.Mesh(eyesGeometry, eyesMaterial);
+
+eyes.position.set(0, 0, -2);
+
+scene.add(eyes);
+
 // ========
 // Renderer
 // ========
@@ -300,6 +322,7 @@ animate();
 
 document.addEventListener("DOMContentLoaded", () => {
   unlockLevel = localStorage.getItem("unlockLevel") || 1;
+  if (unlockLevel >= 3) eyesMaterial.opacity = .5;
   if (unlockLevel >= 4) {
     setTimeout(() => {
       document.location.href = "./quote.html";

@@ -12,3 +12,23 @@ canvas {
   inset: 0;
   z-index: 999;
 }
+
+/* .eyes {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  pointer-events: none;
+
+  opacity: 0;
+
+  animation: show 4s ease-in-out 5s 1 forwards;
+} 
+
+@keyframes show {
+  to {
+    opacity: .75;
+  }
+}
+*/
